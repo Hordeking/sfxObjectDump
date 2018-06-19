@@ -29,7 +29,7 @@ void print_usage(void) {
     cerr << "Usage: sfxobjdump <romfile> <vertex list address> <face data address>" << endl;
     cerr << endl;
     cerr << "	-f <n>	Frame n only" << endl;
-    cerr << "\t-b <basename>\tSet base filename.\n\t\t\tOutput filenames will be be in format \"Basename nn\"" << endl;
+    cerr << "	-b <basename>	Set base filename.\n\t\t\tOutput filenames will be be in format \"Basename nn\"" << endl;
     cerr << "	-v	Verbose output" << endl;
     cerr << "	-t	Validate only." << endl;
     cerr << "\n\nsfxobjdump Copyright (C) 2018  JD Fenech\nThis is free software, and you are welcome to redistribute it under certain conditions;\nThis program comes with ABSOLUTELY NO WARRANTY; for details see COPYING file." << endl;
@@ -111,15 +111,15 @@ int main(int argc, char * argv[])
 
 	for(;n<test.frameCount();++n){
 
-		string out_filename = base_filename + "_" + ((test.frameCount()>=100&&n<100)?to_string(0):string()) + ((test.frameCount()>=10&&n<10)?to_string(0):string()) + to_string(n) + ".obj";
+		string out_modelname = base_filename + "_" + ((test.frameCount()>=100&&n<100)?to_string(0):string()) + ((test.frameCount()>=10&&n<10)?to_string(0):string()) + to_string(n) + ".obj";
 
-		ofstream outfile(out_filename);
+		ofstream outfile(out_modelname + string(".obj"));
 
 		cerr << "Outputting frame " << n << " of this object in Wavefront OBJ format." << endl;
 
 		outfile << "# Frame " << n << endl << endl;
 
-		outfile << "o " << base_filename + "_" + ((test.frameCount()>=100&&n<100)?to_string(0):string()) + ((test.frameCount()>=10&&n<10)?to_string(0):string()) + to_string(n) << endl << endl;
+		outfile << "o " << out_modelname << endl << endl;
 
 		for(auto vertex: test.getVertexList(n)){
 			outfile << "v ";
