@@ -1,5 +1,7 @@
 // sfxObjdump. Driver program to test sfxObj object and dump
-// the contained model to wavefront obj. Copyright (C) 2018 JD Fenech (hordeking@users.noreply.github.com)
+// the contained model to wavefront obj. Copyright (C) 2018 JD Fenech
+// (hordeking@users.noreply.github.com) based on sfxObjReader by
+// Stéphane Dallongeville.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,6 +22,7 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
+#include <cmath>
 
 #include "SFXObject.h"
 
@@ -111,7 +114,8 @@ int main(int argc, char * argv[])
 
 	for(;n<test.frameCount();++n){
 
-		string out_modelname = base_filename + "_" + ((test.frameCount()>=100&&n<100)?to_string(0):string()) + ((test.frameCount()>=10&&n<10)?to_string(0):string()) + to_string(n) + ".obj";
+		string out_modelname = base_filename;
+		if (test.frameCount()>1) out_modelname = out_modelname + "_" + ((test.frameCount()>=100&&n<100)?to_string(0):string()) + ((test.frameCount()>=10&&n<10)?to_string(0):string()) + to_string(n);
 
 		ofstream outfile(out_modelname + string(".obj"));
 
@@ -121,21 +125,38 @@ int main(int argc, char * argv[])
 
 		outfile << "o " << out_modelname << endl << endl;
 
+		outfile << "# Vertex List. To convert float x' to signed 8bit x, x = floor(x'*127+.5)." << endl;
+
 		for(auto vertex: test.getVertexList(n)){
-			outfile << "v ";
-			outfile << vertex.getFormattedString() << endl;
+			outfile << "v";
+
+			for(auto coord: vertex.getCoords()){
+				outfile << " " << coord/127.0f;
+			}
+
+			outfile << endl;
 		}
+
+		outfile << endl << "# Normals components range from -1.0 to 1.0. To convert back to signed 8bit, x = floor(x'*127+.5)" << endl;
 
 		outfile << endl << "usemtl Default" << endl;
 
 		for(auto face: test.getFaceList()){
 			//cout << face.vertex.size();
 
+			float w = sqrt( face.nx*face.nx + face.ny*face.ny + face.nz*face.nz);
+
+			outfile << "vn " << (int) face.nx/(-w) << "\t" << (int) face.ny/(-w) << "\t" << (int) face.nz/(-w) << endl;
+
 			if (1==face.nVerts) outfile << "p";
 			if (2==face.nVerts) outfile << "l";
 			if (3<=face.nVerts) outfile << "f";
 
-			for(auto iVert: face.vertex) outfile << "	" << (unsigned int) iVert+1;
+			for(auto iVert: face.vertex){
+				outfile << "	" << (unsigned int) iVert+1;
+				//outfile << "/" /* << (int) vt */;
+				//outfile << "/-1" /* << (int) vn+1 */;
+			}
 
 			outfile << endl;
 		}

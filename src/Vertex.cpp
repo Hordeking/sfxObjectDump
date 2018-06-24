@@ -1,16 +1,18 @@
 // sfxObj Object. Parser and container for Starfox (1991) and possibly
-// other Argonaut Software models. Copyright (C) 2018 JD Fenech (hordeking@users.noreply.github.com)
-// 
+// other Argonaut Software models. Copyright (C) 2018 JD Fenech
+// (hordeking@users.noreply.github.com) based on sfxObjReader by
+// Stéphane Dallongeville.
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -83,6 +85,13 @@ Vertex& Vertex::operator=(const Vertex& rhs)
     return *this;
 }
 
+std::vector<int> Vertex::getCoords(void){
+    std::vector<int> outval;
+    outval.push_back(x);
+    outval.push_back(y);
+    outval.push_back(z);
+    return outval;
+}
 std::string Vertex::getFormattedString(){
     //Starfox Coords: +x-left, +z-forward
     return  std::to_string(x) +
