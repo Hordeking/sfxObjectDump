@@ -81,9 +81,9 @@ int main(int argc, char * argv[])
 	ifstream romfile(string(argv[optind]), ifstream::binary);
 	if (!romfile.good()) { cerr << (string(argv[1]) + ": File not found, or unable to be opened.") << endl << endl; print_usage(); return -1;}
 
-	//	cout << stoull(string(argv[1]), nullptr, 16) << endl;
+	//	cout << stoull(string(argv[1]), nullptr, 0) << endl;
 
-    SFXObject test(romfile, stoull(string(argv[optind+1]), nullptr, 16), stoull(string(argv[optind+2]), nullptr, 16));
+    SFXObject test(romfile, stoull(string(argv[optind+1]), nullptr, 0), stoull(string(argv[optind+2]), nullptr, 0));
 
 	if (verbose) cerr << "This SFXObject is " << (test.isValid()?"valid.":"not valid.") << endl;
 	if(!test.isValid()) return -1;
