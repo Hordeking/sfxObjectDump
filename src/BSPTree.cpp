@@ -107,7 +107,7 @@ BSPTree::BSPTree(BufferReader & buf)
 
 		//Front child. This is the right branch. Our node will have an offset that points at it.
 		//	We don't even need to seekg to it with the buffer, as once we process each back branch, we can move on to the front branch.
-		//	The front brancg offset is more for direct traversal in live code, an efficiency which we don't actually need here.
+		//	The front branch offset is more for direct traversal in live code, an efficiency which we don't actually need here.
 		if (frontBranchOffset!=0x0000){
 			front = new BSPTree(buf);
 		}
