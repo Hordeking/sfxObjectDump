@@ -131,7 +131,10 @@ int main(int argc, char * argv[])
 			outfile << "v";
 
 			for(auto coord: vertex.getCoords()){
-				outfile << " " << coord/127.0f;
+				if (!vertex.getCoordsType())
+					outfile << " " << coord/127.0f;
+				else
+					outfile << " " << coord/32767.0f;
 			}
 
 			outfile << endl;
@@ -146,7 +149,7 @@ int main(int argc, char * argv[])
 
 			float w = sqrt( face.nx*face.nx + face.ny*face.ny + face.nz*face.nz);
 
-			outfile << "vn " << (int) face.nx/(-w) << "\t" << (int) face.ny/(-w) << "\t" << (int) face.nz/(-w) << endl;
+			if (0<w) outfile << "vn " << (int) face.nx/(-w) << "\t" << (int) face.ny/(-w) << "\t" << (int) face.nz/(-w) << endl;
 
 			if (1==face.nVerts) outfile << "p";
 			if (2==face.nVerts) outfile << "l";

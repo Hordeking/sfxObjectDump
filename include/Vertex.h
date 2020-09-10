@@ -59,6 +59,8 @@ class Vertex
 
         std::vector<int> getCoords(void);
 
+	bool getCoordsType(void);
+
         std::string getFormattedString();
 
     protected:
@@ -66,7 +68,7 @@ class Vertex
         signed int x; //!< Member variable "x"
         signed int y; //!< Member variable "y"
         signed int z; //!< Member variable "z"
-        bool sh; //!< Member variable "sh"
+        bool sh; //!< Wide-Coordinate flag
 };
 
 #endif // VERTEX_H

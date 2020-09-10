@@ -213,10 +213,10 @@ std::vector<Vertex> SFXObject::buildVertexBloc()
 
 		switch (listType)
 		{
-			case 0x04:
-			case 0x08:
-			case 0x34:
-			case 0x38:
+			case 0x04:	// pointsb
+			case 0x08:	// pointsw
+			case 0x34:	// pointsxw
+			case 0x38:	// pointsxb
 				// add vertex bloc to result
 				append(result, buildVertexSubBloc() );
 				break;

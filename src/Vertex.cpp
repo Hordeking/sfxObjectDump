@@ -61,9 +61,17 @@ Vertex::Vertex(const Vertex & v, bool xflip, bool yflip, bool zflip){
 
 Vertex::Vertex(BufferReader & buf, bool sh): sh(sh) {
 
-    x = sh?buf.nextShort():buf.nextByte();
-    y = sh?buf.nextShort():buf.nextByte();
-    z = sh?buf.nextShort():buf.nextByte();
+    if (sh) {
+        x = buf.nextShort();
+        y = buf.nextShort();
+        z = buf.nextShort();
+    }
+    else
+    {
+        x = buf.nextByte();
+        y = buf.nextByte();
+        z = buf.nextByte();
+    }
 
 }
 
@@ -91,6 +99,9 @@ std::vector<int> Vertex::getCoords(void){
     outval.push_back(y);
     outval.push_back(z);
     return outval;
+}
+bool Vertex::getCoordsType(void){
+    return sh;
 }
 std::string Vertex::getFormattedString(){
     //Starfox Coords: +x-left, +z-forward
