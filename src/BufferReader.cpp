@@ -18,37 +18,6 @@
 
 #include "BufferReader.h"
 
-	int8_t BufferReader::getByte(int off)
-	{
-		return 0;
-	}
-
-	uint8_t BufferReader::getUByte(int off)
-	{
-		return 0;
-	}
-
-	int16_t BufferReader::getShort(int off)
-	{
-		return 0;
-	}
-
-	uint16_t BufferReader::getUShort(int off)
-	{
-		return 0;
-	}
-
-	int32_t BufferReader::getInt(int off)
-	{
-		return 0;
-	}
-
-	uint32_t BufferReader::getUInt(int off)
-	{
-		return 0;
-	}
-
-
 
 	uint8_t BufferReader::getUByte()
 	{

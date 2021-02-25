@@ -27,13 +27,6 @@ class BufferReader : public std::stringstream {
 
 	public: BufferReader(std::ifstream & input){	operator<<(input.rdbuf());	}
 
-	public:  uint8_t getUByte(int off);
-	public: uint16_t getUShort(int off);
-	public: uint32_t getUInt(int off);
-	public:   int8_t getByte(int off);
-	public:  int16_t getShort(int off);
-	public:  int32_t getInt(int off);
-
 	public:  uint8_t getUByte();
 	public: uint16_t getUShort();
 	public: uint32_t getUInt();

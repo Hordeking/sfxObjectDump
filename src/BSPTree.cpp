@@ -187,8 +187,8 @@ BSPTree& BSPTree::operator=(const BSPTree& rhs){
 	if (&rhs==this) return *this;
 
 	// This is a deep copy. If this item was already set up, just blow away everything
-	if (nullptr!=back) delete back; back = nullptr;
-	if (nullptr!=front) delete front; front = nullptr;
+	if (nullptr!=back) { delete back; back = nullptr; }
+	if (nullptr!=front) { delete front; front = nullptr; }
 
 	// Now we proceed with the copy
 	nodeType = rhs.nodeType;
