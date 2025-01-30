@@ -100,9 +100,10 @@ std::vector<int> Vertex::getCoords(void){
     outval.push_back(z);
     return outval;
 }
-bool Vertex::getCoordsType(void){
+bool Vertex::isShort(void) const {
     return sh;
 }
+
 std::string Vertex::getFormattedString(){
     //Starfox Coords: +x-left, +z-forward
     return  std::to_string(x) +
@@ -118,4 +119,17 @@ std::string Vertex::getFormattedString(){
             std::string(" ") +
             std::to_string(-y);
 */
+}
+
+std::tuple<float,float,float> Vertex::getFloatCoords(void) const {
+  if (!isShort())
+    return std::make_tuple(x/127.0f, y/127.0f, z/127.0f);
+  else
+    return std::make_tuple(x/32767.0f, y/32767.0f, z/32767.0f);
+}
+
+std::string Vertex::toString(char delimiter) {
+  float x, y, z;
+  std::tie(x, y, z) = getFloatCoords();
+  return std::to_string(x) + delimiter  + std::to_string(-y) + delimiter + std::to_string(-z);
 }

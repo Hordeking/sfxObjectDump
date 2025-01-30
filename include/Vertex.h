@@ -19,6 +19,7 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
+#include <tuple>
 #include <string>
 #include <vector>
 #include "BufferReader.h"
@@ -59,7 +60,11 @@ class Vertex
 
         std::vector<int> getCoords(void);
 
-	bool getCoordsType(void);
+        std::tuple<float,float,float> getFloatCoords(void) const;
+
+        std::string toString(char delimiter = ' ');
+
+        bool isShort(void) const;
 
         std::string getFormattedString();
 

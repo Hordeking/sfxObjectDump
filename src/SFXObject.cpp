@@ -21,7 +21,9 @@
 
 #include "SFXObject.h"
 
-SFXObject::SFXObject(std::ifstream & inData, size_t vertexAddress, size_t facedataAddress): buf(inData), vertexAddress(vertexAddress), facedataAddress(facedataAddress)
+constexpr int MAX_MATERIALS = 256;
+
+SFXObject::SFXObject(std::ifstream & inData, size_t vertexAddress, size_t facedataAddress, size_t materialAddress): buf(inData), vertexAddress(vertexAddress), facedataAddress(facedataAddress), materialAddress(materialAddress)
 {
 
 	//Start by sucking in those vertices
@@ -29,7 +31,15 @@ SFXObject::SFXObject(std::ifstream & inData, size_t vertexAddress, size_t faceda
 	//std::vector<std::vector<Vertex>> vertexAll;
 	std::vector<Vertex> vertexFrame;
 
-	buf.seekg(vertexAddress);
+	// Read materials
+	materials.clear();
+	buf.seekg(materialAddress);
+	int m = 0;
+	while (m++ < MAX_MATERIALS && buf.good()) {
+		uint16_t material = buf.nextUShort();
+		materials.push_back(material);
+	}
+	buf.seekg(vertexAddress, buf.beg);
 
 	size_t iFrame = 0;
 
@@ -201,6 +211,10 @@ SFXObject::SFXObject(std::ifstream & inData, size_t vertexAddress, size_t faceda
 
 	return;
 
+}
+
+uint16_t SFXObject::getMaterial(size_t index) {
+	return materials.at(index);
 }
 
 std::vector<Vertex> SFXObject::buildVertexBloc()

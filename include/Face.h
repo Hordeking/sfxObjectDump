@@ -36,14 +36,14 @@ class Face
 
 	public: unsigned int nVerts;
 	public: uint8_t faceID;
-	public: uint8_t color;
+	public: uint8_t material;
 	public: int8_t nx, ny, nz;
 	public: std::vector<uint8_t> vertex;
 	public: std::string getFormattedString()
 			{
 				return	std::string("nVerts: ")+std::to_string(int(nVerts))+
 						std::string("	faceID: ")+std::to_string(faceID)+
-						std::string("	Color: ")+std::to_string(int(color))+
+						std::string("	Color: ")+std::to_string(int(material))+
 						std::string("	Normal: [")+std::to_string(nx)+", "+std::to_string(ny)+", "+std::to_string(nz)+"]";
 
 			}
