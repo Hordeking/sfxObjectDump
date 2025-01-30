@@ -29,7 +29,7 @@ Face::Face(BufferReader & buf)
 
 	nVerts = buf.nextUByte(); //nVerts;
 	faceID = buf.nextUByte();
-	color = buf.nextUByte();
+	material = buf.nextUByte();
 	nx = buf.nextByte();
 	ny = buf.nextByte();
 	nz = buf.nextByte();

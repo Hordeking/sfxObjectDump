@@ -9,6 +9,8 @@ Usage: sfxobjdump &lt;romfile&gt; &lt;vertex list address&gt; &lt;face data addr
 			Output filenames will be be in format "Basename nn"
 	-v	Verbose output
 	-t	Validate only.
+	-g	Triangulate faces
+	-m	Generate materials file
 </pre>
 
 Currently only outputs the data in .obj format. For animated objects, it will output one .obj for each frame.

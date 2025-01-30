@@ -139,7 +139,7 @@ bool BSPTree::readFacegroup(BufferReader & buf){
 
 		myPolygon.nVerts = buf.nextUByte(); //nVerts;
 		myPolygon.faceID = buf.nextUByte();
-		myPolygon.color = buf.nextUByte();
+		myPolygon.material = buf.nextUByte();
 		myPolygon.nx = buf.nextByte();
 		myPolygon.ny = buf.nextByte();
 		myPolygon.nz = buf.nextByte();

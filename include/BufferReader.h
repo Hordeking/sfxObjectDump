@@ -19,6 +19,7 @@
 #ifndef BUFFERREADER_H
 #define BUFFERREADER_H
 
+#include <sstream>
 #include <fstream>
 #include <iostream>
 #include <iomanip>

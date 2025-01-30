@@ -35,11 +35,11 @@ class SFXObject
 		// This object will expect that data begins with proper object data
 		// vertexAddress and faceAddress are really just holdovers from Stef's decoder, and not really necessary here.
 		// We might use them to cross-check stuff, though.
-		SFXObject(std::ifstream & inData, size_t vertexAddress=0, size_t facedataAddress=0);
+		SFXObject(std::ifstream & inData, size_t vertexAddress=0, size_t facedataAddress=0, size_t materialAddress=0x18213);
 		~SFXObject(){ if (nullptr!=bspTree) delete bspTree;}
 
 		// Returns the vertex list for a particular frame.
-		std::vector<Vertex> getVertexList(size_t iFrame = 0) {	return vertexList.at(iFrame); }
+		std::vector<Vertex>& getVertexList(size_t iFrame = 0) { return vertexList.at(iFrame); }
 
 		// Returns the triangle list. All frames share the same polygon and triangle data.
 		std::vector<Triangle> getTriangleList(void) {	return triangles; }
@@ -52,6 +52,8 @@ class SFXObject
 
 		size_t frameCount(void) { return nFrames; }
 
+		uint16_t getMaterial(size_t index);
+
 		bool isValid(void);
 
 		BSPTree * bspTree = nullptr;
@@ -61,12 +63,14 @@ class SFXObject
 		BufferReader buf;
 		size_t vertexAddress = 0;
 		size_t facedataAddress = 0;
+		size_t materialAddress = 0x18213;
 		size_t bsptreeAddress = 0;
 		size_t facegroupsAddress = 0;
 		bool valid = false;
 
 		std::vector<std::vector<Vertex>> vertexList;
 		std::vector<Triangle> triangles;
+		std::vector<uint16_t> materials;
 
 		// We also need some auxilliary data from the header, like the palette and scaling. These should get passed in on creation.
 

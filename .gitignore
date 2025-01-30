@@ -1,4 +1,12 @@
 bin/
 obj/
+src/*.obj
+src/*.lib
+viewer/*.obj
+viewer/*.exe
+viewer/*.lib
 sfxObjectDumper.depend
 sfxObjectDumper.layout
+*.mtl
+*.obj
+*.bmp
