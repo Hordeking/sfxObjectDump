@@ -69,7 +69,7 @@ SFXObject::SFXObject(std::ifstream & inData, size_t vertexAddress, size_t faceda
 			default:
 				// unknown
 				std::cerr << std::hex << std::setfill('0');
-				std::cerr << "In Frame " << (int) iFrame << ", Unknown vertex list type 0x" << std::setw(2) << (int)listType << " at address 0x" << std::setw(8) << (unsigned int)buf.tellg() -1 << std::endl;
+				std::cerr << "In Frame " << (int) iFrame << ", Unknown vertex list type 0x" << std::setw(2) << (int)listType << " at address 0x" << std::setw(8) << (unsigned int)buf.tellg()-1 << std::endl;
 				std::cerr << std::setw(0) << std::setfill(' ') << std::dec;
 				valid = false;
 				return;	//Return empty vector if failure.
@@ -232,7 +232,7 @@ std::vector<Vertex> SFXObject::buildVertexBloc()
 			default:
 				// unknown
 				std::cerr << std::hex << std::setfill('0');
-				std::cerr << "Unknown vertex list type 0x" << std::setw(2) << (int) listType << " at address 0x" << std::setw(8) << (unsigned int)buf.tellg() - 1 << std::endl;
+				std::cerr << "Unknown vertex list type 0x" << std::setw(2) << (int) listType << " at address 0x" << std::setw(8) << (unsigned int)buf.tellg() << std::endl;
 				std::cerr << std::setw(0) << std::setfill(' ') << std::dec;
 				valid = false;
 				exit(-1);
